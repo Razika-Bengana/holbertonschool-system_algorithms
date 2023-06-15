@@ -42,6 +42,8 @@ rb_tree_t *rb_tree_node(rb_tree_t *parent, int value, rb_color_t color);
 
 /* 1. Red-Black - Is Red-Black */
 int rb_tree_is_valid(const rb_tree_t *tree);
+int is_bst(const rb_tree_t *node);
+int is_red_black(const rb_tree_t *node, const rb_tree_t *parent, int black_count);
 
 /* 2. Red-Black - Insert */
 rb_tree_t *rb_tree_insert(rb_tree_t **tree, int value);
