@@ -51,18 +51,23 @@ int check_black_height(const rb_tree_t *tree, int black_height, int height);
 
 /* 2. Red-Black - Insert */
 rb_tree_t *rb_tree_insert(rb_tree_t **tree, int value);
-rb_tree_t *get_sibling(rb_tree_t *node);
-rb_tree_t *rotate_left(rb_tree_t *tree);
-rb_tree_t *rotate_right(rb_tree_t *tree);
-rb_tree_t *insert_case4(rb_tree_t *node);
-rb_tree_t *insert_repair(rb_tree_t *root, rb_tree_t *node);
-rb_tree_t *insert_recurse(rb_tree_t *tree, int value);
+void rb_insert_fixup(rb_tree_t **tree, rb_tree_t *new_node);
+rb_tree_t *rb_insert_fixup_left(rb_tree_t **tree, rb_tree_t *new_node);
+rb_tree_t *rb_insert_fixup_right(rb_tree_t **tree, rb_tree_t *new_node);
+void rb_rotate_left(rb_tree_t **tree, rb_tree_t *x);
+void rb_rotate_right(rb_tree_t **tree, rb_tree_t *y);
 
 /* 3. Red-Black - Array to R-B Tree */
 rb_tree_t *array_to_rb_tree(int *array, size_t size);
 
 /* 4. Red-Black - Remove */
 rb_tree_t *rb_tree_remove(rb_tree_t *root, int n);
+rb_tree_t *rb_tree_delete(rb_tree_t *root, rb_tree_t *remove);
+void rb_transplant(rb_tree_t **root, rb_tree_t *x, rb_tree_t *y);
+rb_tree_t *rb_delete_fixup(rb_tree_t **root, rb_tree_t *x);
+rb_tree_t *rb_delete_fix_left(rb_tree_t **root, rb_tree_t *x);
+rb_tree_t *rb_delete_fix_right(rb_tree_t **root, rb_tree_t *x);
+rb_tree_t *tree_min(rb_tree_t *root);
 
 
 #endif /* _RB_TREE_H_ */
