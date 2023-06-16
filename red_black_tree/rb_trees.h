@@ -70,5 +70,8 @@ void rebalance_red_siblings(
 rb_tree_t *single_rotation(rb_tree_t *root, int direction);
 rb_tree_t *double_rotation(rb_tree_t *root, int direction);
 
+#define IS_RED(node)	(node != NULL && node->color == RED)
+int is_red(rb_tree_t *node);
+
 
 #endif /* _RB_TREE_H_ */
