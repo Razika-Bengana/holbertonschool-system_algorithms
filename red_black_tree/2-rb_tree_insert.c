@@ -1,5 +1,6 @@
 #include "rb_trees.h"
 
+void rb_insert_fixup(rb_tree_t **tree, rb_tree_t *new_node);
 rb_tree_t *rb_insert_fixup_right(rb_tree_t **tree, rb_tree_t *new_node);
 rb_tree_t *rb_insert_fixup_left(rb_tree_t **tree, rb_tree_t *new_node);
 void rb_rotate_left(rb_tree_t **tree, rb_tree_t *x);
