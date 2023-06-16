@@ -1,68 +1,6 @@
 #include "rb_trees.h"
 
 /**
- * rb_tree_insert - inserts a value in a Red-Black Tree
- *
- * @tree: double pointer to the root node of the Red-Black tree
- * to insert the value in
- * @value: the value to store in the node to be inserted
- *
- * Return: pointer to the created node, or NULL on failure
- */
-rb_tree_t *rb_tree_insert(rb_tree_t **tree, int value)
-{
-	rb_tree_t *current = NULL;
-	rb_tree_t *parent = NULL;
-	rb_tree_t *new_node = NULL;
-
-	if (!tree)
-		return (NULL);
-
-	current = *tree;
-	while (current != NULL)
-	{
-		parent = current;
-		if (current->n == value)
-			return (NULL);
-		if (value < current->n)
-			current = current->left;
-		else if (value > current->n)
-			current = current->right;
-	}
-	new_node = rb_tree_node(parent, value, RED);
-	if (!new_node)
-		return (NULL);
-
-	if (parent == NULL)
-		*tree = new_node;
-	else if (new_node->n < parent->n)
-		parent->left = new_node;
-	else
-		parent->right = new_node;
-	rb_insert_fixup(tree, new_node);
-	return (new_node);
-}
-
-/**
- * rb_insert_fixup - rotates nodes and recolors to fix the violation
- *
- * @tree: double pointer to the root node
- * @new_node: the new node to fix
- */
-void rb_insert_fixup(rb_tree_t **tree, rb_tree_t *new_node)
-{
-	while (new_node->parent && new_node->parent->color == RED)
-	{
-		if (new_node->parent->parent && new_node->parent ==
-		    new_node->parent->parent->left)
-			new_node = rb_insert_right(tree, new_node);
-		else
-			new_node = rb_insert_left(tree, new_node);
-	}
-	(*tree)->color = BLACK;
-}
-
-/**
  * rb_insert_left - fixes when p->p->left
  *
  * @tree: root node
@@ -127,6 +65,70 @@ rb_tree_t *rb_insert_right(rb_tree_t **tree, rb_tree_t *new_node)
 		new_node->parent->parent->color = RED;
 		rb_rotate_right(tree, new_node->parent->parent);
 	}
+	return (new_node);
+}
+
+/**
+ * rb_insert_fixup - rotates nodes and recolors to fix the violation
+ *
+ * @tree: double pointer to the root node
+ * @new_node: the new node to fix
+ */
+void rb_insert_fixup(rb_tree_t **tree, rb_tree_t *new_node)
+{
+	while (new_node->parent && new_node->parent->color == RED)
+	{
+		if (new_node->parent->parent && new_node->parent ==
+		    new_node->parent->parent->left)
+			new_node = rb_insert_right(tree, new_node);
+		else
+			new_node = rb_insert_left(tree, new_node);
+	}
+	(*tree)->color = BLACK;
+}
+
+
+
+/**
+ * rb_tree_insert - inserts a value in a Red-Black Tree
+ *
+ * @tree: double pointer to the root node of the Red-Black tree
+ * to insert the value in
+ * @value: the value to store in the node to be inserted
+ *
+ * Return: pointer to the created node, or NULL on failure
+ */
+rb_tree_t *rb_tree_insert(rb_tree_t **tree, int value)
+{
+	rb_tree_t *current = NULL;
+	rb_tree_t *parent = NULL;
+	rb_tree_t *new_node = NULL;
+
+	if (!tree)
+		return (NULL);
+
+	current = *tree;
+	while (current != NULL)
+	{
+		parent = current;
+		if (current->n == value)
+			return (NULL);
+		if (value < current->n)
+			current = current->left;
+		else if (value > current->n)
+			current = current->right;
+	}
+	new_node = rb_tree_node(parent, value, RED);
+	if (!new_node)
+		return (NULL);
+
+	if (parent == NULL)
+		*tree = new_node;
+	else if (new_node->n < parent->n)
+		parent->left = new_node;
+	else
+		parent->right = new_node;
+	rb_insert_fixup(tree, new_node);
 	return (new_node);
 }
 
