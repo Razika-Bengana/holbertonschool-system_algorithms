@@ -61,17 +61,16 @@ void rb_rotate_right(rb_tree_t **tree, rb_tree_t *y);
 rb_tree_t *array_to_rb_tree(int *array, size_t size);
 
 /* 4. Red-Black - Remove */
+void rb_rotate_left(rb_tree_t **tree, rb_tree_t *node);
+void rb_rotate_right(rb_tree_t **tree, rb_tree_t *node);
+void left_sibling(rb_tree_t **root, rb_tree_t **child,
+		  rb_tree_t **parent, rb_tree_t *sibling);
+void right_sibling(rb_tree_t **root, rb_tree_t **child,
+		   rb_tree_t **parent, rb_tree_t *sibling);
+void rb_tree_delete_fixup(rb_tree_t **root, rb_tree_t *child,
+			  rb_tree_t *parent);
+rb_tree_t *rb_tree_successor(rb_tree_t *node);
 rb_tree_t *rb_tree_remove(rb_tree_t *root, int n);
-rb_tree_t *rb_tree_remove_r(rb_tree_t *root, int n, int *flag);
-int remove_recurse_direction_helper(rb_tree_t *root, int n, int *flag);
-rb_tree_t *rb_rebalance(rb_tree_t *root, int direction, int *flag);
-void rebalance_red_siblings(
-        int direction, rb_tree_t *p, rb_tree_t *s, rb_tree_t *root, int *flag);
-rb_tree_t *single_rotation(rb_tree_t *root, int direction);
-rb_tree_t *double_rotation(rb_tree_t *root, int direction);
-
-#define IS_RED(node)	(node != NULL && node->color == RED)
-int is_red(rb_tree_t *node);
 
 
 #endif /* _RB_TREE_H_ */
