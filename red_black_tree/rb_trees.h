@@ -51,6 +51,12 @@ int check_black_height(const rb_tree_t *tree, int black_height, int height);
 
 /* 2. Red-Black - Insert */
 rb_tree_t *rb_tree_insert(rb_tree_t **tree, int value);
+rb_tree_t *get_sibling(rb_tree_t *node);
+rb_tree_t *rotate_left(rb_tree_t *tree);
+rb_tree_t *rotate_right(rb_tree_t *tree);
+rb_tree_t *insert_case4(rb_tree_t *node);
+rb_tree_t *insert_repair(rb_tree_t *root, rb_tree_t *node);
+rb_tree_t *insert_recurse(rb_tree_t *tree, int value);
 
 /* 3. Red-Black - Array to R-B Tree */
 rb_tree_t *array_to_rb_tree(int *array, size_t size);
