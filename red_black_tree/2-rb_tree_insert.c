@@ -1,5 +1,10 @@
 #include "rb_trees.h"
 
+rb_tree_t *rb_insert_fixup_right(rb_tree_t **tree, rb_tree_t *new_node);
+rb_tree_t *rb_insert_fixup_left(rb_tree_t **tree, rb_tree_t *new_node);
+void rb_rotate_left(rb_tree_t **tree, rb_tree_t *x);
+void rb_rotate_right(rb_tree_t **tree, rb_tree_t *y);
+
 /**
  * rb_tree_insert - Inserts a value into a Red-Black Tree
  *
