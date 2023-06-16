@@ -62,12 +62,13 @@ rb_tree_t *array_to_rb_tree(int *array, size_t size);
 
 /* 4. Red-Black - Remove */
 rb_tree_t *rb_tree_remove(rb_tree_t *root, int n);
-rb_tree_t *rb_tree_delete(rb_tree_t *root, rb_tree_t *remove);
-void rb_transplant(rb_tree_t **root, rb_tree_t *x, rb_tree_t *y);
-rb_tree_t *rb_delete_fixup(rb_tree_t **root, rb_tree_t *x);
-rb_tree_t *rb_delete_fix_left(rb_tree_t **root, rb_tree_t *x);
-rb_tree_t *rb_delete_fix_right(rb_tree_t **root, rb_tree_t *x);
-rb_tree_t *tree_min(rb_tree_t *root);
+rb_tree_t *rb_tree_remove_r(rb_tree_t *root, int n, int *flag);
+int remove_recurse_direction_helper(rb_tree_t *root, int n, int *flag);
+rb_tree_t *rb_rebalance(rb_tree_t *root, int direction, int *flag);
+void rebalance_red_siblings(
+        int direction, rb_tree_t *p, rb_tree_t *s, rb_tree_t *root, int *flag);
+rb_tree_t *single_rotation(rb_tree_t *root, int direction);
+rb_tree_t *double_rotation(rb_tree_t *root, int direction);
 
 
 #endif /* _RB_TREE_H_ */
