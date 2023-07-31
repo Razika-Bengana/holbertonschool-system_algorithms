@@ -15,8 +15,8 @@ vertex_t *graph_add_vertex(graph_t *graph, const char *str)
 	if (graph == NULL || str == NULL)
 		return (NULL);
 
-	vertex_t *current_vertex;
-	vertex_t *new_vertex;
+	vertex_t *current_vertex = NULL;
+	vertex_t *new_vertex = NULL;
 
 	for (current_vertex = graph->vertices; current_vertex != NULL;
 	     current_vertex = current_vertex->next)
