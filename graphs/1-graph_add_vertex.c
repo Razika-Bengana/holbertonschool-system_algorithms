@@ -15,6 +15,7 @@ vertex_t *graph_add_vertex(graph_t *graph, const char *str)
 	if (graph == NULL || str == NULL)
 		return (NULL);
 	vertex_t *current_vertex;
+	vertex_t *new_vertex;
 
 	for (current_vertex = graph->vertices; current_vertex != NULL;
 	     current_vertex = current_vertex->next)
@@ -22,8 +23,6 @@ vertex_t *graph_add_vertex(graph_t *graph, const char *str)
 		if (strcmp(current_vertex->content, str) == 0)
 			return (NULL);
 	}
-	vertex_t *new_vertex;
-
 	new_vertex = (vertex_t *)malloc(sizeof(vertex_t));
 	if (new_vertex == NULL)
 		return (NULL);
