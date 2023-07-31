@@ -1,9 +1,9 @@
 #include "graphs.h"
 
 /**
- * graph_create - Creates an empty graph_t structure.
+ * graph_create - program that creates an empty graph_t structure
  *
- * Return: A pointer to the newly created graph_t structure on success,
+ * Return: a pointer to the newly created graph_t structure on success,
  * or NULL if memory allocation fails
  */
 
