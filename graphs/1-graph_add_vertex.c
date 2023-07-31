@@ -22,8 +22,9 @@ vertex_t *graph_add_vertex(graph_t *graph, const char *str)
 		if (strcmp(current_vertex->content, str) == 0)
 			return (NULL);
 	}
-	vertex_t *new_vertex = (vertex_t *)malloc(sizeof(vertex_t));
+	vertex_t *new_vertex;
 
+	new_vertex = (vertex_t *)malloc(sizeof(vertex_t));
 	if (new_vertex == NULL)
 		return (NULL);
 	new_vertex->content = strdup(str);
