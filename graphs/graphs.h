@@ -1,8 +1,10 @@
 #ifndef GRAPHS_H
 #define GRAPHS_H
 
-#include <stddef.h>
+#include <stdio.h>
 #include <stdlib.h>
+#include <stddef.h>
+#include <string.h>
 
 /**
  * enum edge_type_e - Enumerates the different types of
@@ -70,6 +72,10 @@ typedef struct graph_s
 
 /* task 0. Create graph */
 graph_t *graph_create(void);
+
+/* task 1. Add a vertex */
+vertex_t *graph_add_vertex(graph_t *graph, const char *str);
+void graph_display(const graph_t *graph);
 
 
 #endif /* GRAPHS_H */
