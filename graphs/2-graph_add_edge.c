@@ -10,7 +10,7 @@
  * Return: a pointer to the vertex if found, or NULL if not found
  */
 
-static vertex_t *find_vertex_by_content(graph_t *graph, const char *content)
+vertex_t *find_vertex_by_content(graph_t *graph, const char *content)
 {
 	vertex_t *current_vertex = graph->vertices;
 
@@ -35,7 +35,7 @@ static vertex_t *find_vertex_by_content(graph_t *graph, const char *content)
  * or NULL if memory allocation fails
  */
 
-static edge_t *create_edge(vertex_t *src_vertex, vertex_t *dest_vertex)
+edge_t *create_edge(vertex_t *src_vertex, vertex_t *dest_vertex)
 {
 	edge_t *new_edge = (edge_t *)malloc(sizeof(edge_t));
 
@@ -56,7 +56,7 @@ static edge_t *create_edge(vertex_t *src_vertex, vertex_t *dest_vertex)
  * Return: 1 on success, 0 on failure
  */
 
-static int add_edge_to_vertex(vertex_t *vertex, edge_t *new_edge)
+int add_edge_to_vertex(vertex_t *vertex, edge_t *new_edge)
 {
 	if (vertex->edges == NULL)
 	{
