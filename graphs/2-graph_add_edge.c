@@ -93,16 +93,15 @@ int add_edge_to_vertex(vertex_t *vertex, edge_t *new_edge)
 int graph_add_edge(graph_t *graph, const char *src, const char *dest,
 		   edge_type_t type)
 {
+	vertex_t *src_vertex = find_vertex_by_content(graph, src);
+	vertex_t *dest_vertex = find_vertex_by_content(graph, dest);
+	edge_t *new_edge_src_to_dest = create_edge(src_vertex, dest_vertex);
+
 	if (graph == NULL || src == NULL || dest == NULL)
 		return (0);
 
-	vertex_t *src_vertex = find_vertex_by_content(graph, src);
-	vertex_t *dest_vertex = find_vertex_by_content(graph, dest);
-
 	if (src_vertex == NULL || dest_vertex == NULL)
 		return (0);
-
-	edge_t *new_edge_src_to_dest = create_edge(src_vertex, dest_vertex);
 
 	if (new_edge_src_to_dest == NULL)
 		return (0);
