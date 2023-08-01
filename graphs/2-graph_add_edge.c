@@ -28,7 +28,6 @@ vertex_t *find_vertex_by_content(graph_t *graph, const char *content)
 /**
  * create_edge - program that creates a new edge from src to dest
  *
- * @src_vertex: a pointer to the source vertex
  * @dest_vertex: a pointer to the destination vertex
  *
  * Return: a pointer to the newly created edge if successful,
@@ -94,15 +93,16 @@ int add_edge_to_vertex(vertex_t *vertex, edge_t *new_edge)
 int graph_add_edge(graph_t *graph, const char *src, const char *dest,
 		   edge_type_t type)
 {
-	vertex_t *src_vertex = find_vertex_by_content(graph, src);
-	vertex_t *dest_vertex = find_vertex_by_content(graph, dest);
-	edge_t *new_edge_src_to_dest = create_edge(src_vertex, dest_vertex);
-
 	if (graph == NULL || src == NULL || dest == NULL)
 		return (0);
 
+	vertex_t *src_vertex = find_vertex_by_content(graph, src);
+	vertex_t *dest_vertex = find_vertex_by_content(graph, dest);
+
 	if (src_vertex == NULL || dest_vertex == NULL)
 		return (0);
+
+	edge_t *new_edge_src_to_dest = create_edge(src_vertex, dest_vertex);
 
 	if (new_edge_src_to_dest == NULL)
 		return (0);
@@ -112,20 +112,18 @@ int graph_add_edge(graph_t *graph, const char *src, const char *dest,
 		free(new_edge_src_to_dest);
 		return (0);
 	}
-/* If it's BIDIRECTIONAL, create the edge from destination to source */
+
 	if (type == BIDIRECTIONAL)
 	{
 		edge_t *new_edge_dest_to_src = create_edge(dest_vertex, src_vertex);
 
 		if (new_edge_dest_to_src == NULL)
 		{
-/* If allocation fails, undo the changes made earlier */
 			src_vertex->edges = new_edge_src_to_dest->next;
 			src_vertex->nb_edges--;
 			free(new_edge_src_to_dest);
 			return (0);
 		}
-/* Add the new edge to the destination vertex */
 		if (!add_edge_to_vertex(dest_vertex, new_edge_dest_to_src))
 		{
 			free(new_edge_dest_to_src);
