@@ -35,7 +35,7 @@ vertex_t *find_vertex_by_content(graph_t *graph, const char *content)
  * or NULL if memory allocation fails
  */
 
-edge_t *create_edge(vertex_t *src_vertex, vertex_t *dest_vertex)
+edge_t *create_edge(vertex_t *dest_vertex)
 {
 	edge_t *new_edge = (edge_t *)malloc(sizeof(edge_t));
 
