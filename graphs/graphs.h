@@ -78,9 +78,9 @@ vertex_t *graph_add_vertex(graph_t *graph, const char *str);
 void graph_display(const graph_t *graph);
 
 /* task 2. Add an edge */
-static vertex_t *find_vertex_by_content(graph_t *graph, const char *content);
-static edge_t *create_edge(vertex_t *src_vertex, vertex_t *dest_vertex);
-static int add_edge_to_vertex(vertex_t *vertex, edge_t *new_edge);
+vertex_t *find_vertex_by_content(graph_t *graph, const char *content);
+edge_t *create_edge(vertex_t *src_vertex, vertex_t *dest_vertex);
+int add_edge_to_vertex(vertex_t *vertex, edge_t *new_edge);
 int graph_add_edge(graph_t *graph, const char *src, const char *dest,
 		   edge_type_t type);
 
