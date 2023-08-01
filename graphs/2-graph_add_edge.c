@@ -95,7 +95,7 @@ int graph_add_edge(graph_t *graph, const char *src, const char *dest,
 {
 	vertex_t *src_vertex = find_vertex_by_content(graph, src);
 	vertex_t *dest_vertex = find_vertex_by_content(graph, dest);
-	edge_t *new_edge_src_to_dest = create_edge(src_vertex, dest_vertex);
+	edge_t *new_edge_src_to_dest = create_edge(dest_vertex);
 
 	if (graph == NULL || src == NULL || dest == NULL)
 		return (0);
@@ -114,7 +114,7 @@ int graph_add_edge(graph_t *graph, const char *src, const char *dest,
 
 	if (type == BIDIRECTIONAL)
 	{
-		edge_t *new_edge_dest_to_src = create_edge(dest_vertex, src_vertex);
+		edge_t *new_edge_dest_to_src = create_edge(src_vertex);
 
 		if (new_edge_dest_to_src == NULL)
 		{
