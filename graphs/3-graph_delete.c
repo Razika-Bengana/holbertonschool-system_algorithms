@@ -12,10 +12,11 @@
 
 void graph_delete(graph_t *graph)
 {
+	vertex_t *current_vertex = graph->vertices;
+	vertex_t *next_vertex = current_vertex->next;
+
 	if (!graph)
 		return;
-
-	vertex_t *current_vertex = graph->vertices;
 
 	while (current_vertex)
 	{
@@ -28,8 +29,6 @@ void graph_delete(graph_t *graph)
 			free(current_edge);
 			current_edge = next_edge;
 		}
-
-		vertex_t *next_vertex = current_vertex->next;
 
 		free(current_vertex->content);
 		free(current_vertex);
