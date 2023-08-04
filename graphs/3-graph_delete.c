@@ -1,4 +1,4 @@
-#include <stdlib.h>
+#include "graphs.h"
 
 /**
  * graph_delete - program that frees the memory occupied by a graph
