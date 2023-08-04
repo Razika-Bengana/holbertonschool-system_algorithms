@@ -80,10 +80,17 @@ void graph_display(const graph_t *graph);
 /* task 2. Add an edge */
 edge_t *graph_add_single_edge(vertex_t *src_vertex, vertex_t *dest_vertex);
 int graph_add_edge(graph_t *graph, const char *src,
-                   const char *dest, edge_type_t type);
+		   const char *dest, edge_type_t type);
 
 /* task 3. Delete graph */
 void graph_delete(graph_t *graph);
+
+/* task 4. Depth-first traversal */
+size_t depth_first_traverse(const graph_t *graph, void (*action)
+			    (const vertex_t *v, size_t depth));
+void dfs_helper(const vertex_t *current_vertex, size_t depth,
+		       int *visited, void (*action)
+		       (const vertex_t *v, size_t depth), size_t *max_depth);
 
 
 #endif /* GRAPHS_H */
