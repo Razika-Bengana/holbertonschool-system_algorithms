@@ -82,4 +82,8 @@ edge_t *graph_add_single_edge(vertex_t *src_vertex, vertex_t *dest_vertex);
 int graph_add_edge(graph_t *graph, const char *src,
                    const char *dest, edge_type_t type);
 
+/* task 3. Delete graph */
+void graph_delete(graph_t *graph);
+
+
 #endif /* GRAPHS_H */
