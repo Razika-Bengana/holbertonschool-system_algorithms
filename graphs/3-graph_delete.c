@@ -1,36 +1,36 @@
-#include "graphs.h"
 #include <stdlib.h>
 
 /**
- * graph_delete - program that deletes a graph by freeing
- * all its vertices and edges
+ * graph_delete - program that frees the memory occupied by a graph
+ * and its vertices
  *
- * @graph: the graph to be deleted
- *
- * Return: nothing (void)
+ * @graph: a pointer to the graph to be deleted
  */
 
 void graph_delete(graph_t *graph)
 {
-	vertex_t *current_vertex = graph->vertices;
-	vertex_t *next_vertex = current_vertex->next;
+	vertex_t *current_vertex = NULL, *next_vertex = NULL;
+	edge_t *current_edge = NULL, *next_edge = NULL;
 
 	if (!graph)
 		return;
 
+	current_vertex = graph->vertices;
 	while (current_vertex)
 	{
-		edge_t *current_edge = current_vertex->edges;
+		next_vertex = current_vertex->next;
 
+		if (current_vertex->content)
+			free(current_vertex->content);
+
+		current_edge = current_vertex->edges;
 		while (current_edge)
 		{
-			edge_t *next_edge = current_edge->next;
-
+			next_edge = current_edge->next;
 			free(current_edge);
 			current_edge = next_edge;
 		}
 
-		free(current_vertex->content);
 		free(current_vertex);
 		current_vertex = next_vertex;
 	}
