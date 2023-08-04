@@ -1,134 +1,80 @@
 #include "graphs.h"
 
 /**
- * find_vertex_by_content - program that find a vertex in the graph
- * by its content
+ * graph_add_single_edge - program that adds a single directed edge to a vertex
  *
- * @graph: a pointer to the graph to search in
- * @content: the content of the vertex to find
+ * @src_vertex: The source vertex for the edge
+ * @dest_vertex: The destination vertex for the edge
  *
- * Return: a pointer to the vertex if found, or NULL if not found
+ * Return: a pointer to the created edge, or NULL on failure
  */
 
-vertex_t *find_vertex_by_content(graph_t *graph, const char *content)
+edge_t *graph_add_single_edge(vertex_t *src_vertex, vertex_t *dest_vertex)
 {
-	vertex_t *current_vertex = graph->vertices;
+	edge_t *new_edge = NULL, *temp_edge = NULL;
 
-	while (current_vertex != NULL)
-	{
-		if (strcmp(current_vertex->content, content) == 0)
-		{
-			return (current_vertex);
-		}
-		current_vertex = current_vertex->next;
-	}
-	return (NULL); /* Vertex not found */
-}
+	if (!src_vertex || !dest_vertex)
+		return (NULL);
 
-/**
- * create_edge - program that creates a new edge from src to dest
- *
- * @dest_vertex: a pointer to the destination vertex
- *
- * Return: a pointer to the newly created edge if successful,
- * or NULL if memory allocation fails
- */
-
-edge_t *create_edge(vertex_t *dest_vertex)
-{
-	edge_t *new_edge = (edge_t *)malloc(sizeof(edge_t));
-
-	if (new_edge == NULL)
+	new_edge = malloc(sizeof(edge_t));
+	if (!new_edge)
 		return (NULL);
 	new_edge->dest = dest_vertex;
 	new_edge->next = NULL;
+
+	temp_edge = src_vertex->edges;
+	while (temp_edge && temp_edge->next)
+		temp_edge = temp_edge->next;
+
+	if (temp_edge)
+		temp_edge->next = new_edge;
+	else
+		src_vertex->edges = new_edge;
+	src_vertex->nb_edges++;
+
 	return (new_edge);
 }
 
 /**
- * add_edge_to_vertex - program that add a new edge to the linked list
- * of edges for a vertex
+ * graph_add_edge - program that adds an edge between vertices in the graph
  *
- * @vertex: a pointer to the vertex to which the edge will be added
- * @new_edge: a pointer to the new edge to be added
+ * @graph: the graph to which the edge should be added
+ * @src: the content of the source vertex
+ * @dest: the content of the destination vertex
+ * @type: the type of edge (UNIDIRECTIONAL or BIDIRECTIONAL)
  *
  * Return: 1 on success, 0 on failure
  */
 
-int add_edge_to_vertex(vertex_t *vertex, edge_t *new_edge)
+int graph_add_edge(graph_t *graph, const char *src,
+		   const char *dest, edge_type_t type)
 {
-	if (vertex->edges == NULL)
+	vertex_t *temp_vertex = NULL, *src_vertex = NULL, *dest_vertex = NULL;
+
+	if (!graph || !src || !dest ||
+	    type < UNIDIRECTIONAL || type > BIDIRECTIONAL)
+		return (0);
+
+	for (temp_vertex = graph->vertices; temp_vertex; temp_vertex =
+		     temp_vertex->next)
 	{
-		vertex->edges = new_edge;
+		if (strcmp(temp_vertex->content, src) == 0)
+			src_vertex = temp_vertex;
+		else if (strcmp(temp_vertex->content, dest) == 0)
+			dest_vertex = temp_vertex;
 	}
-	else
-	{
-		edge_t *current_edge = vertex->edges;
 
-		while (current_edge->next != NULL)
-		{
-			current_edge = current_edge->next;
-		}
-		current_edge->next = new_edge;
-	}
-	vertex->nb_edges++;
-	return (1); /* Success */
-}
-
-/**
- * graph_add_edge - program that adds an edge between two vertices
- * to an existing graph
- *
- * @graph: a pointer to the graph to add the edge to
- * @src: the string identifying the vertex to make the connection from
- * @dest: the string identifying the vertex to connect to
- * @type: the type of edge (UNIDIRECTIONAL or BIDIRECTIONAL)
- *
- * Return: 1 on success, or 0 on failure;
- * on failure, no edge must have be created, and there must be no memory leak;
- * if either src or dest are not found in any vertex of the graph,
- * the function must fail, and there must be no leak.
- */
-
-int graph_add_edge(graph_t *graph, const char *src, const char *dest,
-		   edge_type_t type)
-{
-	vertex_t *src_vertex = find_vertex_by_content(graph, src);
-	vertex_t *dest_vertex = find_vertex_by_content(graph, dest);
-	edge_t *new_edge_src_to_dest = create_edge(dest_vertex);
-
-	if (graph == NULL || src == NULL || dest == NULL)
+	if (!src_vertex || !dest_vertex)
 		return (0);
 
-	if (src_vertex == NULL || dest_vertex == NULL)
+	if (graph_add_single_edge(src_vertex, dest_vertex) == NULL)
 		return (0);
-
-	if (new_edge_src_to_dest == NULL)
-		return (0);
-
-	if (!add_edge_to_vertex(src_vertex, new_edge_src_to_dest))
-	{
-		free(new_edge_src_to_dest);
-		return (0);
-	}
 
 	if (type == BIDIRECTIONAL)
 	{
-		edge_t *new_edge_dest_to_src = create_edge(src_vertex);
-
-		if (new_edge_dest_to_src == NULL)
-		{
-			src_vertex->edges = new_edge_src_to_dest->next;
-			src_vertex->nb_edges--;
-			free(new_edge_src_to_dest);
+		if (graph_add_single_edge(dest_vertex, src_vertex) == NULL)
 			return (0);
-		}
-		if (!add_edge_to_vertex(dest_vertex, new_edge_dest_to_src))
-		{
-			free(new_edge_dest_to_src);
-			free(new_edge_src_to_dest);
-			return (0);
-		}
 	}
-	return (1); /* Success */
+
+	return (1);
 }
