@@ -17,7 +17,7 @@ void dfs_helper(const vertex_t *current_vertex, size_t depth,
 		       (const vertex_t *v, size_t depth), size_t *max_depth)
 {
 	edge_t *current_edge = current_vertex->edges;
-	
+
 	visited[current_vertex->index] = 1;
 
 	if (depth > *max_depth)
@@ -49,12 +49,12 @@ size_t depth_first_traverse(const graph_t *graph, void (*action)
 			    (const vertex_t *v, size_t depth))
 {
 	size_t max_depth = 0;
-	
+	int *visited = calloc(graph->nb_vertices, sizeof(int));
+
 	if (!graph || !action)
 		return (0);
 
 /* Visited array to keep track of visited vertices */
-	int *visited = calloc(graph->nb_vertices, sizeof(int));
 
 	if (!visited)
 		return (0);
