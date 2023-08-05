@@ -92,5 +92,9 @@ size_t traverseVerticesRecursively(vertex_t *vertex, char *visited_flags,
 size_t depth_first_traverse(const graph_t *graph, void (*action)
 			    (const vertex_t *v, size_t depth));
 
+/* task 5. Breadth-first traversal */
+size_t breadth_first_traverse(const graph_t *graph, void (*action)
+			      (const vertex_t *v, size_t depth));
+
 
 #endif /* GRAPHS_H */
