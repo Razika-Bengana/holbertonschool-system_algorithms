@@ -2,53 +2,55 @@
 
 /**
  * breadth_first_traverse - program that traverses a graph using
- * breadth-first search
+ * the breadth-first algorithm
  *
- * @graph: the graph to traverse
- * @action: a function to perform an action on each vertex along with its depth
+ * @graph: a pointer to the graph to traverse
+ * @action: a pointer to a function that acts on each traversed vertex
  *
- * Return: the maximum depth reached during traversal, or 0 on failure
+ * Return: the maximum depth reached during traversal
  */
 
-size_t breadth_first_traverse(const graph_t *graph,
-			      void (*action)(const vertex_t *v, size_t depth))
+size_t breadth_first_traverse(const graph_t *graph, void (*action)
+			      (const vertex_t *v, size_t depth))
 {
-	vertex_t *start_vertex = graph->vertices;
-	vertex_t *current_vertex = queue[front++];
-	char visited_flags[2048] = {0};
-	edge_t *edge = current_vertex->edges;
-	size_t max_depth = 0;
-	/* Simulate a queue using an array (not thread-safe) */
-	vertex_t *queue[2048];
-	size_t front = 0, rear = 0;
+	size_t current_depth, current_round_size, next_round_size;
+	vertex_t **current_vertices;
+	char *visited;
+	edge_t *edge;
+	size_t current_vertex_index, next_vertex_index;
 
-	if (!graph || !action)
+	if (!graph || !action || graph->nb_vertices == 0)
 		return (0);
 
-	if (!start_vertex)
-		return (0);
-
-	queue[rear++] = start_vertex;
-	visited_flags[start_vertex->index] = 1;
-	while (front < rear)
+	visited = calloc(graph->nb_vertices, sizeof(char));
+	current_vertices = calloc(graph->nb_vertices + 1, sizeof(vertex_t *));
+	current_vertices[0] = graph->vertices;
+	visited[0] = 1, current_depth = 0, current_vertex_index = 1,
+		next_vertex_index = 0, current_round_size = 1,
+		next_round_size = 0;
+	for (size_t current_index = 0; current_vertices[current_index];
+	     current_index++)
 	{
-		size_t current_depth = visited_flags[current_vertex->index];
-
-		action(current_vertex, current_depth);
-
-		if (current_depth > max_depth)
-			max_depth = current_depth;
-
-		while (edge)
+		action(current_vertices[current_index], current_depth);
+		for (edge = current_vertices[current_index]->edges; edge;
+		     edge = edge->next)
 		{
-			if (visited_flags[edge->dest->index] == 0)
+			if (visited[edge->dest->index] == 0)
 			{
-				queue[rear++] = edge->dest;
-				visited_flags[edge->dest->index] =
-					current_depth + 1;
+				current_vertices[current_vertex_index++] =
+					edge->dest;
+				visited[edge->dest->index] = 1;
+				next_round_size += 1;
 			}
-			edge = edge->next;
+		}
+		if (--current_round_size == 0)
+		{
+			current_depth++;
+			current_round_size = next_round_size;
+			next_round_size = 0;
 		}
 	}
-	return (max_depth - 1);
+	free(visited);
+	free(current_vertices);
+	return (current_depth - 1);
 }
