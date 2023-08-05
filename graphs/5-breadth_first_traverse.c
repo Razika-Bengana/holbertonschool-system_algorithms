@@ -17,7 +17,7 @@ size_t breadth_first_traverse(const graph_t *graph, void (*action)
 	vertex_t **current_vertices;
 	char *visited;
 	edge_t *edge;
-	size_t current_vertex_index, next_vertex_index;
+	size_t current_index, current_vertex_index;
 
 	if (!graph || !action || graph->nb_vertices == 0)
 		return (0);
@@ -28,7 +28,7 @@ size_t breadth_first_traverse(const graph_t *graph, void (*action)
 	visited[0] = 1, current_depth = 0, current_vertex_index = 1,
 		next_vertex_index = 0, current_round_size = 1,
 		next_round_size = 0;
-	for (size_t current_index = 0; current_vertices[current_index];
+	for (current_index = 0; current_vertices[current_index];
 	     current_index++)
 	{
 		action(current_vertices[current_index], current_depth);
