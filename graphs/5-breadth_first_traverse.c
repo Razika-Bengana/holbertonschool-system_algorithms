@@ -16,17 +16,16 @@ size_t breadth_first_traverse(const graph_t *graph,
 	vertex_t *start_vertex = graph->vertices;
 	char visited_flags[2048] = {0};
 	edge_t *edge = current_vertex->edges;
+	size_t max_depth = 0;
+	/* Simulate a queue using an array (not thread-safe) */
+	vertex_t *queue[2048];
+	size_t front = 0, rear = 0;
 
 	if (!graph || !action)
 		return (0);
 
 	if (!start_vertex)
 		return (0);
-
-	size_t max_depth = 0;
-/* Simulate a queue using an array (not thread-safe) */
-	vertex_t *queue[2048];
-	size_t front = 0, rear = 0;
 
 	queue[rear++] = start_vertex;
 	visited_flags[start_vertex->index] = 1;
