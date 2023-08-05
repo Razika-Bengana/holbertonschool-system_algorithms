@@ -14,6 +14,7 @@ size_t breadth_first_traverse(const graph_t *graph,
 			      void (*action)(const vertex_t *v, size_t depth))
 {
 	vertex_t *start_vertex = graph->vertices;
+	vertex_t *current_vertex = queue[front++];
 	char visited_flags[2048] = {0};
 	edge_t *edge = current_vertex->edges;
 	size_t max_depth = 0;
@@ -31,7 +32,6 @@ size_t breadth_first_traverse(const graph_t *graph,
 	visited_flags[start_vertex->index] = 1;
 	while (front < rear)
 	{
-		vertex_t *current_vertex = queue[front++];
 		size_t current_depth = visited_flags[current_vertex->index];
 
 		action(current_vertex, current_depth);
