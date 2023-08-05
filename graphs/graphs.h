@@ -86,11 +86,11 @@ int graph_add_edge(graph_t *graph, const char *src,
 void graph_delete(graph_t *graph);
 
 /* task 4. Depth-first traversal */
+size_t traverseVerticesRecursively(vertex_t *vertex, char *visited_flags,
+				   size_t current_depth, void (*vertex_action)
+				   (const vertex_t *v, size_t depth));
 size_t depth_first_traverse(const graph_t *graph, void (*action)
 			    (const vertex_t *v, size_t depth));
-void dfs_helper(const vertex_t *current_vertex, size_t depth,
-		       int *visited, void (*action)
-		       (const vertex_t *v, size_t depth), size_t *max_depth);
 
 
 #endif /* GRAPHS_H */
