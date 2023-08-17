@@ -1,7 +1,7 @@
 #include "heap.h"
 
 /**
- * heap_create - program that create a new heap data structure
+ * heap_create - program that creates a new heap data structure
  *
  * @data_cmp: a pointer to the comparison function for node data
  *
