@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stddef.h>
+#include <string.h>
 
 
 /**
@@ -41,9 +42,17 @@ typedef struct heap_s
 	binary_tree_node_t *root;
 } heap_t;
 
-
+/* task 0 */
 heap_t *heap_create(int (*data_cmp)(void *, void *));
+
+/* task 1 */
 binary_tree_node_t *binary_tree_node(binary_tree_node_t *parent, void *data);
+
+/* task 2 */
+binary_tree_node_t *heap_insert(heap_t *heap, void *data);
+binary_tree_node_t *heap_insert_recursive(binary_tree_node_t *node, void *data,
+					  int (*data_cmp)(void *, void *));
+void heapify_up(binary_tree_node_t *node, int (*data_cmp)(void *, void *));
 
 
 #endif /* HEAP_H */
