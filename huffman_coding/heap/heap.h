@@ -91,4 +91,9 @@ void *extract_root(heap_t *heap);
 void *heap_extract(heap_t *heap);
 
 
+/* task 4 */
+void recursive_node_free(binary_tree_node_t *node, void (*free_data)(void *));
+void heap_delete(heap_t *heap, void (*free_data)(void *));
+
+
 #endif /* HEAP_H */
