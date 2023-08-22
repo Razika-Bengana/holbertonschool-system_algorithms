@@ -3,6 +3,7 @@
 
 #include <stdlib.h>
 #include <stddef.h>
+#include "heap.h"
 
 /**
  * struct symbol_s - Stores a char and its associated frequency
@@ -19,6 +20,11 @@ typedef struct symbol_s
 
 /* task 5 */
 symbol_t *symbol_create(char data, size_t freq);
+
+
+/* task 6 */
+int symbol_cmp(void *p1, void *p2);
+heap_t *huffman_priority_queue(char *data, size_t *freq, size_t size);
 
 
 #endif /* HUFFMAN_H */
