@@ -42,6 +42,23 @@ typedef struct heap_s
 	binary_tree_node_t *root;
 } heap_t;
 
+
+
+/**
+ * bt_node_queue_t - Structure representing a node in a binary tree node queue
+ *
+ * @node: a pointer to the binar tree node
+ * @next: a pointer to the next node in the queue
+ */
+
+typedef struct binary_tree_node_queue_s
+{
+	binary_tree_node_t *node;
+	struct binary_tree_node_queue_s *next;
+} bt_node_queue_t;
+
+
+
 /* task 0 */
 heap_t *heap_create(int (*data_cmp)(void *, void *));
 
@@ -49,10 +66,23 @@ heap_t *heap_create(int (*data_cmp)(void *, void *));
 binary_tree_node_t *binary_tree_node(binary_tree_node_t *parent, void *data);
 
 /* task 2 */
+bt_node_queue_t *push_bt_node_queue(bt_node_queue_t **queue,
+				    binary_tree_node_t *node);
+void advance_bt_node_queue(bt_node_queue_t **queue);
+void clear_bt_node_queue(bt_node_queue_t **queue);
+binary_tree_node_t *complete_binary_tree_insert(binary_tree_node_t *root,
+						void *data);
+binary_tree_node_t *sift_up_min_heap(binary_tree_node_t *new_node,
+				     int (*data_cmp)(void *, void *));
+binary_tree_node_t *insert_into_heap(binary_tree_node_t **root,
+				     int (*data_cmp)(void *, void *),
+				     void *data);
 binary_tree_node_t *heap_insert(heap_t *heap, void *data);
-binary_tree_node_t *heap_insert_recursive(binary_tree_node_t *node, void *data,
-					  int (*data_cmp)(void *, void *));
-void heapify_up(binary_tree_node_t *node, int (*data_cmp)(void *, void *));
+
+/* task 3 */
+void swap_nodes(binary_tree_node_t *node1, binary_tree_node_t *node2);
+void heapify_down(heap_t *heap, binary_tree_node_t *node);
+void *heap_extract(heap_t *heap);
 
 
 #endif /* HEAP_H */
