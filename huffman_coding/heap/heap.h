@@ -62,8 +62,10 @@ typedef struct binary_tree_node_queue_s
 /* task 0 */
 heap_t *heap_create(int (*data_cmp)(void *, void *));
 
+
 /* task 1 */
 binary_tree_node_t *binary_tree_node(binary_tree_node_t *parent, void *data);
+
 
 /* task 2 */
 bt_node_queue_t *push_bt_node_queue(bt_node_queue_t **queue,
@@ -79,9 +81,13 @@ binary_tree_node_t *insert_into_heap(binary_tree_node_t **root,
 				     void *data);
 binary_tree_node_t *heap_insert(heap_t *heap, void *data);
 
+
 /* task 3 */
-void swap_nodes(binary_tree_node_t *node1, binary_tree_node_t *node2);
-void heapify_down(heap_t *heap, binary_tree_node_t *node);
+binary_tree_node_t *swap_nodes(binary_tree_node_t *a, binary_tree_node_t *b);
+binary_tree_node_t *n_node(binary_tree_node_t *node, int n);
+binary_tree_node_t *restore_heapify(int (*data_cmp)(void *, void *),
+				    binary_tree_node_t *node);
+void *extract_root(heap_t *heap);
 void *heap_extract(heap_t *heap);
 
 
