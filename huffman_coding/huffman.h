@@ -32,6 +32,7 @@ int huffman_extract_and_insert(heap_t *priority_queue);
 
 
 /* task 8 */
+void freeNestedNode(void *data);
 binary_tree_node_t *huffman_tree(char *data, size_t *freq, size_t size);
 
 
