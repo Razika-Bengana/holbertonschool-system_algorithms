@@ -35,5 +35,12 @@ int huffman_extract_and_insert(heap_t *priority_queue);
 void freeNestedNode(void *data);
 binary_tree_node_t *huffman_tree(char *data, size_t *freq, size_t size);
 
+/* task 9 */
+int huffman_codes(char *data, size_t *freq, size_t size);
+void free_huffman_tree(binary_tree_node_t *root);
+size_t calculate_tree_depth(binary_tree_node_t *root, size_t depth);
+void print_huffman_codes_recursive(binary_tree_node_t *root, char *code,
+				   size_t depth);
+
 
 #endif /* HUFFMAN_H */
