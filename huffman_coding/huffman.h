@@ -27,4 +27,8 @@ int compare_frequencies(void *p1, void *p2);
 heap_t *huffman_priority_queue(char *data, size_t *freq, size_t size);
 
 
+/* task 7 */
+int huffman_extract_and_insert(heap_t *priority_queue);
+
+
 #endif /* HUFFMAN_H */
