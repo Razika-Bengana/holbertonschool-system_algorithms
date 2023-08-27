@@ -1,7 +1,5 @@
 #include "huffman.h"
 
-#include "huffman.h"
-
 /**
  * freeNestedNode - this program is used as a free_data parameter
  * to heap_delete;
