@@ -34,5 +34,11 @@ int point_push(queue_t **queue, int x, int y);
 int backtracker(queue_t **queue, int *saw, char **map, int rows,
 		int cols, int x, int y, point_t const *target);
 
+/* task 1 */
+queue_node_t *graph_fill(queue_t *new_node, int *saw, const vertex_t *current,
+			 char *target);
+queue_t *backtracking_graph(graph_t *graph, vertex_t const *start,
+			    vertex_t const *target);
+
 
 #endif /* PATHFINDING_H */
