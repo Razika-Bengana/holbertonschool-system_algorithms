@@ -8,6 +8,10 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define RIGHT {1, 0}
+#define BOTTOM {0, 1}
+#define LEFT {-1, 0}
+#define TOP {0, -1}
 
 /**
  * struct point_s - Structure storing coordinates
@@ -26,13 +30,9 @@ typedef struct point_s
 /* task 0 */
 queue_t *backtracking_array(char **map, int rows, int cols,
 			    point_t const *start, point_t const *target);
-char **create_copy_of_map(char **map, int rows, int cols);
-int find_path(char **map, int rows, int cols, point_t const *target,
-	      point_t const *start, queue_t *path);
-point_t *create_point(int x, int y);
-int is_invalid(int rows, int cols, point_t const *point);
-int points_equal(point_t const *p1, point_t const *p2);
-void reverse_queue(queue_t *queue);
+int point_push(queue_t **queue, int x, int y);
+int backtracker(queue_t **queue, int *saw, char **map, int rows,
+		int cols, int x, int y, point_t const *target);
 
 
 #endif /* PATHFINDING_H */
