@@ -70,12 +70,13 @@ typedef struct graph_s
 } graph_t;
 
 
+void graph_display(const graph_t *graph);
+
 /* task 0. Create graph */
 graph_t *graph_create(void);
 
 /* task 1. Add a vertex */
 vertex_t *graph_add_vertex(graph_t *graph, const char *str);
-void graph_display(const graph_t *graph);
 
 /* task 2. Add an edge */
 edge_t *graph_add_single_edge(vertex_t *src_vertex, vertex_t *dest_vertex);
