@@ -77,8 +77,8 @@ int pushToQueue(GraphQueue *queue, vertex_t *vertex, size_t depth)
  * popFromQueue - program that removes and retrieves a vertex
  * from the front of the queue
  *
- * this function removes the node at the front of the queue, retrieves the vertex
- * and its depth, and then frees the memory of the node;
+ * this function removes the node at the front of the queue, retrieves
+ * the vertex and its depth, and then frees the memory of the node;
  * it adjusts the head of the queue and ensures the correct management
  * of the queue's size
  *
@@ -117,11 +117,13 @@ int popFromQueue(GraphQueue *queue, vertex_t **vertex, size_t *depth)
  * traversal of a graph
  *
  * this function implements the BFS algorithm for graph traversal;
- * it initializes a queue to manage the vertices to be visited and an array to track
- * visited vertices;
- * it iteratively visits vertices in a breadth-first manner, applying the provided
- * action function to each vertex and tracking the maximum depth reached;
- * the function handles memory allocation for traversal management and ensures cleanup
+ * it initializes a queue to manage the vertices to be visited and an array
+ * to track visited vertices;
+ * it iteratively visits vertices in a breadth-first manner, applying the
+ * provided action function to each vertex and tracking the maximum depth
+ * reached;
+ * the function handles memory allocation for traversal management and ensures
+ * cleanup
  *
  * @graph: Pointer to the graph structure to be traversed
  * @action: Function pointer to the action to be performed on each visited vertex
