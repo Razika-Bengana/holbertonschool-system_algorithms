@@ -133,6 +133,7 @@ void processEdges(GraphQueue *queue, const vertex_t *vertex,
 		  size_t currentDepth, size_t *visited)
 {
 	edge_t *currentEdge = vertex->edges;
+
 	while (currentEdge)
 	{
 		if (!visited[currentEdge->dest->index])
