@@ -127,17 +127,17 @@ int popFromQueue(GraphQueue *queue, vertex_t **vertex, size_t *depth)
  *
  * @graph: Pointer to the graph structure to be traversed
  * @action: Function pointer to the action to be performed on each visited
- * 	    vertex
+ * vertex
  *
  * Return: the maximum depth reached in the traversal, or 0 on failure
  */
-
 
 size_t breadth_first_traverse(const graph_t *graph, void (*action)
 (const vertex_t *v, size_t depth))
 {
 	GraphQueue *queue;
-	vertex_t *currentVertex; edge_t *currentEdge;
+	vertex_t *currentVertex;
+	edge_t *currentEdge;
 	size_t maxDepth = 0, currentDepth, i, queueSize, *visited;
 
 	if (!graph || !action || !graph->nb_vertices)
