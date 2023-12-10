@@ -156,6 +156,8 @@ size_t depth_first_traverse(const graph_t *graph, void (*action)
 void freeQueue(GraphQueue *queue);
 int pushToQueue(GraphQueue *queue, vertex_t *vertex, size_t depth);
 int popFromQueue(GraphQueue *queue, vertex_t **vertex, size_t *depth);
+void processEdges(GraphQueue *queue, const vertex_t *vertex, size_t currentDepth,
+		  size_t *visited);
 size_t breadth_first_traverse(const graph_t *graph, void (*action)
 			      (const vertex_t *v, size_t depth));
 
