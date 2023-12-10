@@ -113,67 +113,99 @@ int popFromQueue(GraphQueue *queue, vertex_t **vertex, size_t *depth)
 
 
 /**
- * breadth_first_traverse - program that performs a breadth-first search (BFS)
- * traversal of a graph
+ * processEdges - program that processes all edges connected to
+ * a given vertex in a graph
  *
- * this function implements the BFS algorithm for graph traversal;
- * it initializes a queue to manage the vertices to be visited and an array
- * to track visited vertices;
- * it iteratively visits vertices in a breadth-first manner, applying the
- * provided action function to each vertex and tracking the maximum depth
- * reached;
- * the function handles memory allocation for traversal management and ensures
- * cleanup
+ * this function iterates through all edges of a vertex,
+ * checks if the destination vertex of each edge has been visited,
+ * and if not, adds it to the queue for further processing;
+ * this ensures all connected vertices are traversed
  *
- * @graph: Pointer to the graph structure to be traversed
- * @action: Function pointer to the action to be performed on each visited
- * vertex
+ * @queue: the queue used in the breadth-first traversal
+ * @vertex: the current vertex being processed
+ * @currentDepth: the depth of the current vertex in the traversal
+ * @visited: an array indicating whether a vertex has been visited
  *
- * Return: the maximum depth reached in the traversal, or 0 on failure
+ * Return: nothing (void)
  */
 
-size_t breadth_first_traverse(const graph_t *graph, void (*action)
-(const vertex_t *v, size_t depth))
+void processEdges(GraphQueue *queue, const vertex_t *vertex,
+		  size_t currentDepth, size_t *visited)
+{
+	edge_t *currentEdge = vertex->edges;
+	while (currentEdge)
+	{
+		if (!visited[currentEdge->dest->index])
+		{
+			visited[currentEdge->dest->index] = 1;
+			pushToQueue(queue, currentEdge->dest,
+				    currentDepth + 1);
+		}
+		currentEdge = currentEdge->next;
+	}
+}
+
+
+
+/**
+ * breadth_first_traverse - program that performs a breadth-first traversal
+ * of a graph
+ *
+ * this function traverses a graph starting from a given vertex and explores
+ * all the neighboring vertices at the present depth before moving on to
+ * the vertices at the next depth level;
+ * it uses a queue to keep track of vertices to be processed and an array
+ * to mark visited vertices;
+ * the function applies a provided action to each vertex and tracks the maximum
+ * depth reached during traversal
+ *
+ * @graph: the graph to be traversed
+ * @action: a function to be called on each vertex during traversal
+ *
+ * Return: the maximum depth reached during the traversal
+ */
+
+size_t breadth_first_traverse(const graph_t *graph,
+			      void (*action)(const vertex_t *v, size_t depth))
 {
 	GraphQueue *queue;
 	vertex_t *currentVertex;
-	edge_t *currentEdge;
-	size_t maxDepth = 0, currentDepth, i, queueSize, *visited;
+	size_t maxDepth = 0, currentDepth, i, queueSize;
+	size_t *visited;
 
 	if (!graph || !action || !graph->nb_vertices)
 		return (0);
+
 	visited = calloc(graph->nb_vertices, sizeof(size_t));
+
 	if (!visited)
 		return (0);
+
 	queue = calloc(1, sizeof(GraphQueue));
+
 	if (!queue)
 	{
 		free(visited);
 		return (0);
 	}
+
 	visited[graph->vertices->index] = 1;
 	pushToQueue(queue, graph->vertices, 0);
+
 	while (queue->size)
 	{
 		queueSize = queue->size;
+
 		for (i = 0; i < queueSize; i++)
 		{
 			popFromQueue(queue, &currentVertex, &currentDepth);
 			action(currentVertex, currentDepth);
 			maxDepth = (maxDepth > currentDepth) ? maxDepth : currentDepth;
-			for (currentEdge = currentVertex->edges; currentEdge;
-			currentEdge = currentEdge->next)
-			{
-				if (!visited[currentEdge->dest->index])
-				{
-					visited[currentEdge->dest->index] = 1;
-					pushToQueue(queue, currentEdge->dest,
-						    currentDepth + 1);
-				}
-			}
+			processEdges(queue, currentVertex, currentDepth, visited);
 		}
 	}
 	free(visited);
 	freeQueue(queue);
 	return (maxDepth);
 }
+
