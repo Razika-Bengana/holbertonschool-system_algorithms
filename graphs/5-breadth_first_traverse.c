@@ -1,11 +1,13 @@
 #include "graphs.h"
 
 /**
- * freeQueue - program that frees all the memory allocated for the queue and its nodes
+ * freeQueue - program that frees all the memory allocated for the queue
+ * and its nodes
  *
- * this function iterates through each node in the queue, freeing them individually,
- * and finally frees the queue itself;
- * it ensures that all the memory allocated for queue management is properly released
+ * this function iterates through each node in the queue, freeing them
+ * individually, and finally frees the queue itself;
+ * it ensures that all the memory allocated for queue management is properly
+ * released
  *
  * @queue: a pointer to the 'GraphQueue' structure to be freed
  *
@@ -31,10 +33,11 @@ void freeQueue(GraphQueue *queue)
 /**
  * pushToQueue - program that adds a new vertex to the queue
  *
- * this function creates a new 'GraphQueueNode', assigns the provided vertex and depth to it,
- * and adds it to the end of the queue;
+ * this function creates a new 'GraphQueueNode', assigns the provided vertex
+ * and depth to it, and adds it to the end of the queue;
  * it handles memory allocation for the new node and updates the queue's tail;
- * in case of memory allocation failure, it ensures that the queue is properly freed
+ * in case of memory allocation failure, it ensures that the queue is properly
+ * freed
  *
  * @queue: a pointer to the GraphQueue where the vertex will be added
  * @vertex: a pointer to the vertex to be added to the queue
@@ -71,11 +74,13 @@ int pushToQueue(GraphQueue *queue, vertex_t *vertex, size_t depth)
 
 
 /**
- * popFromQueue - program that removes and retrieves a vertex from the front of the queue
+ * popFromQueue - program that removes and retrieves a vertex
+ * from the front of the queue
  *
- * this function removes the node at the front of the queue, retrieves the vertex and its depth,
- * and then frees the memory of the node;
- * it adjusts the head of the queue and ensures the correct management of the queue's size
+ * this function removes the node at the front of the queue, retrieves the vertex
+ * and its depth, and then frees the memory of the node;
+ * it adjusts the head of the queue and ensures the correct management
+ * of the queue's size
  *
  * @queue: a pointer to the 'GraphQueue' from which the vertex will be removed
  * @vertex: a pointer to store the removed vertex
@@ -108,12 +113,14 @@ int popFromQueue(GraphQueue *queue, vertex_t **vertex, size_t *depth)
 
 
 /**
- * breadth_first_traverse - program that performs a breadth-first search (BFS) traversal of a graph
+ * breadth_first_traverse - program that performs a breadth-first search (BFS)
+ * traversal of a graph
  *
  * this function implements the BFS algorithm for graph traversal;
- * it initializes a queue to manage the vertices to be visited and an array to track visited vertices;
- * it iteratively visits vertices in a breadth-first manner, applying the provided action function to each
- * vertex and tracking the maximum depth reached;
+ * it initializes a queue to manage the vertices to be visited and an array to track
+ * visited vertices;
+ * it iteratively visits vertices in a breadth-first manner, applying the provided
+ * action function to each vertex and tracking the maximum depth reached;
  * the function handles memory allocation for traversal management and ensures cleanup
  *
  * @graph: Pointer to the graph structure to be traversed
@@ -123,13 +130,13 @@ int popFromQueue(GraphQueue *queue, vertex_t **vertex, size_t *depth)
  */
 
 
-size_t breadth_first_traverse(const graph_t *graph, void (*action)(const vertex_t *v, size_t depth))
+size_t breadth_first_traverse(const graph_t *graph, void (*action)
+(const vertex_t *v, size_t depth))
 {
 	GraphQueue *queue;
 	vertex_t *currentVertex;
 	edge_t *currentEdge;
-	size_t maxDepth = 0, currentDepth, i, queueSize;
-	size_t *visited;
+	size_t maxDepth = 0, currentDepth, i, queueSize, *visited;
 
 	if (!graph || !action || !graph->nb_vertices)
 		return (0);
@@ -145,7 +152,6 @@ size_t breadth_first_traverse(const graph_t *graph, void (*action)(const vertex_
 		free(visited);
 		return (0);
 	}
-
 	visited[graph->vertices->index] = 1;
 	pushToQueue(queue, graph->vertices, 0);
 
@@ -158,17 +164,18 @@ size_t breadth_first_traverse(const graph_t *graph, void (*action)(const vertex_
 			action(currentVertex, currentDepth);
 			maxDepth = (maxDepth > currentDepth) ? maxDepth : currentDepth;
 
-			for (currentEdge = currentVertex->edges; currentEdge; currentEdge = currentEdge->next)
+			for (currentEdge = currentVertex->edges; currentEdge;
+			currentEdge = currentEdge->next)
 			{
 				if (!visited[currentEdge->dest->index])
 				{
 					visited[currentEdge->dest->index] = 1;
-					pushToQueue(queue, currentEdge->dest, currentDepth + 1);
+					pushToQueue(queue, currentEdge->dest,
+						    currentDepth + 1);
 				}
 			}
 		}
 	}
-
 	free(visited);
 	freeQueue(queue);
 	return (maxDepth);
