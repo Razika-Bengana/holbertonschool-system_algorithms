@@ -45,7 +45,7 @@ typedef struct heap_s
 
 
 /**
- * struct bt_node_queue_t - Structure representing a node
+ * struct bt_node_queue_s - Structure representing a node
  * in a binary tree node queue
  *
  * @node: a pointer to the binar tree node
