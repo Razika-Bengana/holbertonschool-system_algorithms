@@ -114,6 +114,7 @@ void enqueue(queue_t *queue, void *ptr)
 void *dequeue(queue_t *queue)
 {
 	queue_node_t *front_node;
+	void *data;
 
 	if (is_empty(queue))
 	{
@@ -134,7 +135,7 @@ void *dequeue(queue_t *queue)
 		queue->front->prev = NULL;
 	}
 
-	void *data = front_node->ptr;
+	data = front_node->ptr;
 
 	free(front_node);
 
