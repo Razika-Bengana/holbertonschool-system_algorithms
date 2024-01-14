@@ -48,12 +48,5 @@ queue_t *backtracking_graph(graph_t *graph, vertex_t const *start,
 
 /* task 2 */
 
-queue_t *dijkstra_graph(graph_t *graph, vertex_t const *start, vertex_t const *target);
-void print_visited_vertex(char *vertex_content);
-void enqueue(queue_t *queue, void *ptr);
-void *dequeue(queue_t *queue);
-int is_empty(queue_t *queue);
-
-
 
 #endif /* PATHFINDING_H */
