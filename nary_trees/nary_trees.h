@@ -27,7 +27,6 @@ typedef struct nary_tree_s
 
 
 
-
 /* task 1 */
 nary_tree_t *create_node(char const *str);
 void insert_at_beginning(nary_tree_t *parent, nary_tree_t *node);
@@ -35,6 +34,7 @@ nary_tree_t *nary_tree_insert(nary_tree_t *parent, char const *str);
 
 
 /* task 2 */
+void nary_tree_delete(nary_tree_t *tree);
 
 
 #endif /* NARY_TREES_H */
