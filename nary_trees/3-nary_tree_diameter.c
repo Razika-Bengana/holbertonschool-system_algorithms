@@ -42,16 +42,19 @@ size_t max(size_t a, size_t b)
 
 size_t nary_tree_diameter_helper(nary_tree_t const *node, size_t *diameter)
 {
+	size_t max_depth1, max_depth2;
+	size_t child_depth;
+
 	if (node == NULL)
 	{
 		return (0);
 	}
 
-	size_t max_depth1 = 0, max_depth2 = 0;
+	max_depth1 = 0, max_depth2 = 0;
 
 	for (nary_tree_t const *child = node->children; child != NULL; child = child->next)
 	{
-		size_t child_depth = nary_tree_diameter_helper(child, diameter);
+		child_depth = nary_tree_diameter_helper(child, diameter);
 
 		if (child_depth > max_depth1)
 		{
