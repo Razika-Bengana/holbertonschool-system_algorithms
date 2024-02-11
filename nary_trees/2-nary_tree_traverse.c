@@ -52,12 +52,12 @@ void nary_tree_traverse_helper(nary_tree_t const *node,
 
 
 /**
- * nary_tree_traverse - program that initiates traversal of an 'N-ary tree' from
- * the root, executing a user-defined action on each node
+ * nary_tree_traverse - program that initiates traversal of an 'N-ary tree'
+ * from the root, executing a user-defined action on each node
  *
  * this function leverages 'nary_tree_traverse_helper' to recursively traverse
- * the tree, applying the provided action at each node and determining the tree's
- * maximum depth;
+ * the tree, applying the provided action at each node and determining the
+ * tree's maximum depth;
  * it calculates and returns the maximum depth of the tree as a 'size_t' value
  *
  * @root: the root node of the N-ary tree to start traversal from
@@ -68,7 +68,8 @@ void nary_tree_traverse_helper(nary_tree_t const *node,
  * Return: the maximum depth encountered across all nodes in the tree
  */
 
-size_t nary_tree_traverse(nary_tree_t const *root, void (*action)(nary_tree_t const *node, size_t depth))
+size_t nary_tree_traverse(nary_tree_t const *root,
+			  void (*action)(nary_tree_t const *node, size_t depth))
 {
 	size_t max_depth = 0;
 
