@@ -47,9 +47,7 @@ size_t nary_tree_traverse(nary_tree_t const *root,
 
 
 /* task 3 */
-size_t max(size_t a, size_t b);
-size_t nary_tree_diameter_helper(nary_tree_t const *node, size_t *diameter);
-size_t nary_tree_diameter(nary_tree_t const *root);
+
 
 
 /* task 4 */
