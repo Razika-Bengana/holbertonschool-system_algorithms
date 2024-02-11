@@ -18,8 +18,8 @@
  *       the function duplicates this string for the node's content
  *
  * Return: a pointer to the newly created nary_tree_t node if successful,
- *         or NULL if an error occurs during node creation or string
- *         duplication
+ *	   or NULL if an error occurs during node creation or string
+ *	   duplication
  */
 
 nary_tree_t *create_node(char const *str)
