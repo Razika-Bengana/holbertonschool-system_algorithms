@@ -28,22 +28,33 @@ typedef struct nary_tree_s
 
 
 
-/* task 1 */
+/* task 0 */
 nary_tree_t *create_node(char const *str);
 void insert_at_beginning(nary_tree_t *parent, nary_tree_t *node);
 nary_tree_t *nary_tree_insert(nary_tree_t *parent, char const *str);
 
 
-/* task 2 */
+/* task 1 */
 void nary_tree_delete(nary_tree_t *tree);
 
 
-/* task 3 */
+/* task 2 */
 void nary_tree_traverse_helper(nary_tree_t const *node,
 			       void (*action)(nary_tree_t const *node, size_t depth),
 			       size_t depth, size_t *max_depth);
 size_t nary_tree_traverse(nary_tree_t const *root,
 			  void (*action)(nary_tree_t const *node, size_t depth));
+
+
+/* task 3 */
+size_t max(size_t a, size_t b);
+size_t nary_tree_diameter_helper(nary_tree_t const *node, size_t *diameter);
+size_t nary_tree_diameter(nary_tree_t const *root);
+
+
+/* task 4 */
+
+
 
 
 #endif /* NARY_TREES_H */
