@@ -42,7 +42,8 @@ void nary_tree_delete(nary_tree_t *tree);
 void nary_tree_traverse_helper(nary_tree_t const *node,
 			       void (*action)(nary_tree_t const *node, size_t depth),
 			       size_t depth, size_t *max_depth);
-size_t nary_tree_traverse(nary_tree_t const *root, void (*action)(nary_tree_t const *node, size_t depth));
+size_t nary_tree_traverse(nary_tree_t const *root,
+			  void (*action)(nary_tree_t const *node, size_t depth));
 
 
 #endif /* NARY_TREES_H */
