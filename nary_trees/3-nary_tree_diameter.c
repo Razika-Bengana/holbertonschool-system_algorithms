@@ -44,6 +44,7 @@ size_t nary_tree_diameter_helper(nary_tree_t const *node, size_t *diameter)
 {
 	size_t max_depth1, max_depth2;
 	size_t child_depth;
+	nary_tree_t const *child;
 
 	if (node == NULL)
 	{
@@ -52,7 +53,7 @@ size_t nary_tree_diameter_helper(nary_tree_t const *node, size_t *diameter)
 
 	max_depth1 = 0, max_depth2 = 0;
 
-	for (nary_tree_t const *child = node->children; child != NULL; child = child->next)
+	for (child = node->children; child != NULL; child = child->next)
 	{
 		child_depth = nary_tree_diameter_helper(child, diameter);
 
