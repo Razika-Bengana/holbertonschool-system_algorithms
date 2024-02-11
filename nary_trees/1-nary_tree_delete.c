@@ -16,16 +16,20 @@
 
 void nary_tree_delete(nary_tree_t *tree)
 {
+	nary_tree_t *current_child;
+	nary_tree_t *next_child;
+
 	if (tree == NULL)
 	{
 		return;
 	}
 
 	/* Recursively delete all children */
-	nary_tree_t *current_child = tree->children;
+	current_child = tree->children;
+
 	while (current_child != NULL)
 	{
-		nary_tree_t *next_child = current_child->next; /* Save next child before freeing */
+		next_child = current_child->next; /* Save next child before freeing */
 		nary_tree_delete(current_child);
 		current_child = next_child;
 	}
