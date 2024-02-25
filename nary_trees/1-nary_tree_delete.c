@@ -1,7 +1,8 @@
 #include "nary_trees.h"
 
 /**
- * nary_tree_delete - program that deletes an 'N-ary tree', freeing all allocated memory
+ * nary_tree_delete - program that deletes an 'N-ary tree', freeing
+ * all allocated memory
  *
  * this function uses a depth-first approach to recursively free each node,
  * starting from the leaf nodes and working up to the root;
