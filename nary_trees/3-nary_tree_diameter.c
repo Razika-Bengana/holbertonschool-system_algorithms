@@ -40,7 +40,9 @@ size_t calculate_max_depths(nary_tree_t const *child, size_t depth,
 void update_diameter(size_t max_depth_1, size_t max_depth_2, size_t depth,
 		     size_t *diameter)
 {
-	size_t current_diameter = (max_depth_1 - depth) + (max_depth_2 - depth) + 1;
+	size_t current_diameter;
+
+	current_diameter = (max_depth_1 - depth) + (max_depth_2 - depth) + 1;
 
 	if (current_diameter > *diameter)
 	{
