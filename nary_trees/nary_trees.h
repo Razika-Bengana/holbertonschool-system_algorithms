@@ -2,6 +2,7 @@
 #define NARY_TREES_H
 
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stddef.h>
@@ -47,6 +48,10 @@ size_t nary_tree_traverse(nary_tree_t const *root,
 
 
 /* task 3 */
+size_t calculate_max_depths(nary_tree_t const *child, size_t depth, size_t *diameter);
+void update_diameter(size_t max_depth_1, size_t max_depth_2, size_t depth, size_t *diameter);
+size_t find_tree_diameter(nary_tree_t const *root, size_t depth, size_t *diameter);
+size_t nary_tree_diameter(nary_tree_t const *root);
 
 
 /* task 4 */
