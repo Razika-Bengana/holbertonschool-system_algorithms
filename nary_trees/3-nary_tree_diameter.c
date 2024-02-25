@@ -13,13 +13,14 @@
  * Return: the maximum depth of the current node
  */
 
-size_t calculate_max_depths(nary_tree_t const *child, size_t depth, size_t *diameter)
+size_t calculate_max_depths(nary_tree_t const *child, size_t depth,
+			    size_t *diameter)
 {
 	if (!child)
 	{
 		return (depth);
 	}
-	return find_tree_diameter(child, depth + 1, diameter);
+	return (find_tree_diameter(child, depth + 1, diameter));
 }
 
 
@@ -36,7 +37,8 @@ size_t calculate_max_depths(nary_tree_t const *child, size_t depth, size_t *diam
  * Return: nothing (void)
  */
 
-void update_diameter(size_t max_depth_1, size_t max_depth_2, size_t depth, size_t *diameter)
+void update_diameter(size_t max_depth_1, size_t max_depth_2, size_t depth,
+		     size_t *diameter)
 {
 	size_t current_diameter = (max_depth_1 - depth) + (max_depth_2 - depth) + 1;
 
@@ -59,7 +61,8 @@ void update_diameter(size_t max_depth_1, size_t max_depth_2, size_t depth, size_
  * Return: the maximum depth from the current node
  */
 
-size_t find_tree_diameter(nary_tree_t const *root, size_t depth, size_t *diameter)
+size_t find_tree_diameter(nary_tree_t const *root, size_t depth,
+			  size_t *diameter)
 {
 	size_t *child_depths = NULL, max_depth_1 = depth, max_depth_2 = depth;
 	nary_tree_t *temp;
@@ -78,12 +81,11 @@ size_t find_tree_diameter(nary_tree_t const *root, size_t depth, size_t *diamete
 			fprintf(stderr, "Memory allocation failed\n");
 			return (0);
 		}
-
-		for (temp = root->children, i = 0; temp && i < root->nb_children; temp = temp->next, i++)
+		for (temp = root->children, i = 0; temp && i < root->nb_children;
+		temp = temp->next, i++)
 		{
 			child_depths[i] = calculate_max_depths(temp, depth, diameter);
 		}
-
 		for (i = 0; i < root->nb_children; i++)
 		{
 			if (child_depths[i] > max_depth_1)
