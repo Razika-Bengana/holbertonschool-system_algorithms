@@ -2,7 +2,8 @@
 
 
 /**
- * calculate_max_depths - program that calculates the maximum depths of child nodes
+ * calculate_max_depths - program that calculates the maximum depths
+ * of child nodes
  *
  * @child: a pointer to the current child node
  * @depth: the depth of the current node
@@ -24,7 +25,8 @@ size_t calculate_max_depths(nary_tree_t const *child, size_t depth, size_t *diam
 
 
 /**
- * update_diameter - program that updates the current diameter based on child depths
+ * update_diameter - program that updates the current diameter based
+ * on child depths
  *
  * @max_depth_1: the first maximum depth
  * @max_depth_2: the second maximum depth
@@ -47,7 +49,8 @@ void update_diameter(size_t max_depth_1, size_t max_depth_2, size_t depth, size_
 
 
 /**
- * find_tree_diameter - program that recursively finds the diameter of an N-ary tree
+ * find_tree_diameter - program that recursively finds the diameter
+ * of an N-ary tree
  *
  * @root: a pointer to the root node of the tree to measure
  * @depth: the depth of the current node
@@ -66,7 +69,6 @@ size_t find_tree_diameter(nary_tree_t const *root, size_t depth, size_t *diamete
 	{
 		return (0);
 	}
-
 	if (root->nb_children)
 	{
 		child_depths = malloc(sizeof(size_t) * root->nb_children);
@@ -94,10 +96,8 @@ size_t find_tree_diameter(nary_tree_t const *root, size_t depth, size_t *diamete
 				max_depth_2 = child_depths[i];
 			}
 		}
-
 		free(child_depths);
 	}
-
 	update_diameter(max_depth_1, max_depth_2, depth, diameter);
 
 	return (max_depth_1);
