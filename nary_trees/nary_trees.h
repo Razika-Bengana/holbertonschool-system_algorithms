@@ -58,6 +58,9 @@ size_t nary_tree_diameter(nary_tree_t const *root);
 
 
 /* task 4 */
+int check_node_match(char const *node_content, char const *expected_content);
+int search_path_in_tree(nary_tree_t const *node, char const * const *path,
+			size_t index);
 int path_exists(nary_tree_t const *root, char const * const *path);
 
 
